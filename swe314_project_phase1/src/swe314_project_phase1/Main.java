@@ -10,6 +10,8 @@ public class Main {
 		//kt.encryptWithSteps("Hello there friend!!!");
 		
 		
+		cd.decrypt("OGGVOGVJGTG");
+		
 	}
 	
 }
