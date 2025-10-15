@@ -4,7 +4,11 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		System.out.println("Hello World!!!");
+		KeyedTranspositionEncryptDecrypt kt = new KeyedTranspositionEncryptDecrypt(4);
+		CryptanalysisDecryptor cd = new CryptanalysisDecryptor();
+		//kt.promptKey();
+		//kt.encryptWithSteps("Hello there friend!!!");
+		
 		
 	}
 	
