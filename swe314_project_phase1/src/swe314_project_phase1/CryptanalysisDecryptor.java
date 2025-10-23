@@ -6,33 +6,33 @@ public class CryptanalysisDecryptor {
 
 	private char[] charaFrequency = {'E', 'T', 'A', 'O', 'I', 'N', 'S', 'H', 'R', 'D', 'L', 'C', 'U',
 									 'M', 'W', 'F', 'G', 'Y', 'P', 'B', 'V', 'K', 'J', 'Q', 'X', 'Z'};
-	private LetterFrequencyPair[] cypherCharaFrequency;
+	private LetterFrequencyPair[] cyphertextLetterFrequency;
 	
 	
 	public CryptanalysisDecryptor() {
 		
-		cypherCharaFrequency = new LetterFrequencyPair[26];
+		cyphertextLetterFrequency = new LetterFrequencyPair[26];
 		
 		for (int i = 0; i < 26; ++i) {
-			cypherCharaFrequency[i] = new LetterFrequencyPair((char)('A' + i));
+			cyphertextLetterFrequency[i] = new LetterFrequencyPair((char)('A' + i));
 		}
 		
 	}
 	
 	// simple bubble sort implementation (descending order)
-	public void sortCypherCharaFrequency() {
+	public void sortCyphertextLetterFrequency() {
 		
-		for (int i = 0; i < cypherCharaFrequency.length; ++i) {
+		for (int i = 0; i < cyphertextLetterFrequency.length; ++i) {
 			
-			for (int j = 0; j < cypherCharaFrequency.length - 1 - i; ++j) {
+			for (int j = 0; j < cyphertextLetterFrequency.length - 1 - i; ++j) {
 				
-				if (cypherCharaFrequency[j].frequency < cypherCharaFrequency[j + 1].frequency) {
+				if (cyphertextLetterFrequency[j].frequency < cyphertextLetterFrequency[j + 1].frequency) {
 					
-					LetterFrequencyPair temp = cypherCharaFrequency[j];
+					LetterFrequencyPair temp = cyphertextLetterFrequency[j];
 					
-					cypherCharaFrequency[j] = cypherCharaFrequency[j + 1];
+					cyphertextLetterFrequency[j] = cyphertextLetterFrequency[j + 1];
 					
-					cypherCharaFrequency[j + 1] = temp;
+					cyphertextLetterFrequency[j + 1] = temp;
 					
 				}
 				
@@ -53,7 +53,7 @@ public class CryptanalysisDecryptor {
 		while (!isValid) {
 			
 			try {
-				
+			
 				choice = input.nextInt();
 				
 				if (choice < min || choice > max) {
@@ -70,6 +70,8 @@ public class CryptanalysisDecryptor {
 			}
 			
 		}
+		
+		input.close();
 		
 		return choice;
 	}
@@ -91,12 +93,12 @@ public class CryptanalysisDecryptor {
 		for (int i = 0; i < cyphertext.length(); ++i) {
 			
 			if ((cyphertext.charAt(i) >= 'A' && cyphertext.charAt(i) <= 'Z')) {
-				cypherCharaFrequency[cyphertext.charAt(i) - 'A'].frequency++;
+				cyphertextLetterFrequency[cyphertext.charAt(i) - 'A'].frequency++;
 			}
 			
 		}
 		
-		sortCypherCharaFrequency();
+		sortCyphertextLetterFrequency();
 		
 		
 		while(userChoice != 4 || currentLetter == 26) {
@@ -107,7 +109,7 @@ public class CryptanalysisDecryptor {
 				
 				char chara = cyphertext.charAt(i);
 				
-				if (chara == cypherCharaFrequency[currentLetter].letter) {
+				if (chara == cyphertextLetterFrequency[currentLetter].letter) {
 					
 					newMiddleText += charaFrequency[frequencyLetterIndex];
 					
@@ -160,16 +162,5 @@ public class CryptanalysisDecryptor {
 		}
 		
 	}
-	
-	
-	
-	public static void printArrayLinearly(Object [] array) {
-		
-		for (int i = 0; i < array.length; ++i) {
-			System.out.print(array[i] + "  ");
-		}
-		System.out.println();
-	}
-	
 	
 }

@@ -6,11 +6,11 @@ public class Main {
 		
 		KeyedTranspositionEncryptDecrypt kt = new KeyedTranspositionEncryptDecrypt(4);
 		CryptanalysisDecryptor cd = new CryptanalysisDecryptor();
-		//kt.promptKey();
-		//kt.encryptWithSteps("Hello there friend!!!");
+		kt.promptKey();
+		kt.encryptWithSteps("Hello there friend!!!");
 		
 		
-		cd.decrypt("OGGVOGVJGTG");
+		//cd.decrypt("OGGVOGVJGTG");
 		
 	}
 	
