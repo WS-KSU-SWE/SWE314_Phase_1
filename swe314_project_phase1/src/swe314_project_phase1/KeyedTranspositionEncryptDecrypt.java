@@ -2,7 +2,7 @@ package swe314_project_phase1;
 import java.util.Scanner;
 
 
-public class KeyedTranspositionEncryptDecrypt {
+public class KeyedTranspositionEncryptDecrypt extends EncrypterDecrypter {
 
 	private int[] key;
 	private int[] orderedKey; // in acceding order
@@ -84,7 +84,7 @@ public class KeyedTranspositionEncryptDecrypt {
 	}
 	
 	
-	public void encryptWithSteps(String plaintext) {
+	public void encryptWithSteps() {
 		
 		String middleText = "";
 		String cypherText = "";
@@ -148,7 +148,7 @@ public class KeyedTranspositionEncryptDecrypt {
 	}
 	
 	
-	public void decryptWithSteps(String cyphertext) {
+	public void decryptWithSteps() {
 		
 		String middleText = "";
 		String plainText = "";

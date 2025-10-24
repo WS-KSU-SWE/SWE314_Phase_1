@@ -6,12 +6,23 @@ public class Main {
 		
 		KeyedTranspositionEncryptDecrypt kt = new KeyedTranspositionEncryptDecrypt(4);
 		CryptanalysisDecryptor cd = new CryptanalysisDecryptor();
+		PlayfairEncrypter pl = new PlayfairEncrypter();
+		
+		pl.promptKey();
+		pl.setPlaintext("Hello There");
+		
+		pl.encryptWithSteps();
+		
+		/*
 		kt.promptKey();
-		kt.encryptWithSteps("Hello there friend!!!");
+		kt.setPlaintext("Hello there friend!!!");
+		kt.encryptWithSteps();
+		*/
 		
-		
-		//cd.decrypt("OGGVOGVJGTG");
-		
+		/*
+		cd.setCyphertext("OGGVOGVJGTG");
+		cd.decrypt();
+		*/
 	}
 	
 }

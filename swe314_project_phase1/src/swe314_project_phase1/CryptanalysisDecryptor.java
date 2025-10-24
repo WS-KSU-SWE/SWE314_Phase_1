@@ -2,7 +2,7 @@ package swe314_project_phase1;
 
 import java.util.Scanner;
 
-public class CryptanalysisDecryptor {
+public class CryptanalysisDecryptor extends EncrypterDecrypter {
 
 	private char[] charaFrequency = {'E', 'T', 'A', 'O', 'I', 'N', 'S', 'H', 'R', 'D', 'L', 'C', 'U',
 									 'M', 'W', 'F', 'G', 'Y', 'P', 'B', 'V', 'K', 'J', 'Q', 'X', 'Z'};
@@ -67,17 +67,17 @@ public class CryptanalysisDecryptor {
 			}
 			catch (Exception e) {
 				System.out.print("Please enter an integer: ");
+				input.nextLine();
 			}
 			
 		}
 		
-		input.close();
 		
 		return choice;
 	}
 	
 	
-	public void decrypt(String cyphertext) {
+	public void decrypt() {
 		
 		Stack<String> stack = new LinkedStack<String>();
 		int frequencyLetterIndex = 0;
