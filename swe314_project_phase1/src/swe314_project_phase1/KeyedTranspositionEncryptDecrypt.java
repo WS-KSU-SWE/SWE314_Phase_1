@@ -42,7 +42,7 @@ public class KeyedTranspositionEncryptDecrypt {
 						
 						keyPart = input.nextInt();
 						
-						if (isInKey(key, keyPart)) {
+						if (isInKey(keyPart)) {
 							System.out.print("Please enter an integer that is new: ");
 						}
 						else if (keyPart < 1 || keyPart > key.length) {
@@ -70,7 +70,7 @@ public class KeyedTranspositionEncryptDecrypt {
 	}
 	
 	
-	public boolean isInKey(int[] key, int val) {
+	public boolean isInKey(int val) {
 		
 		for (int i = 0; i < key.length; ++i) {
 			
