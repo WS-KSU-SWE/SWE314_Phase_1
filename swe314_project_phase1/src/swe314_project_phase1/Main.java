@@ -7,11 +7,19 @@ public class Main {
 		KeyedTranspositionEncryptDecrypt kt = new KeyedTranspositionEncryptDecrypt(4);
 		CryptanalysisDecryptor cd = new CryptanalysisDecryptor();
 		PlayfairEncrypter pl = new PlayfairEncrypter();
+		VigenereEncrypter v = new VigenereEncrypter();
 		
+		v.setKey("monKey1");
+		v.setPlaintext("Meet Me there");
+		
+		v.encrpytWithSteps();
+		
+		/*
 		pl.promptKey();
 		pl.setPlaintext("Hello There");
 		
 		pl.encryptWithSteps();
+		*/
 		
 		/*
 		kt.promptKey();

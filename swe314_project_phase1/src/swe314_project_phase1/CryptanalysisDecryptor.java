@@ -84,16 +84,16 @@ public class CryptanalysisDecryptor extends EncrypterDecrypter {
 		int currentLetter = 0;
 		String middleText;
 		
-		cyphertext = cyphertext.toUpperCase();
+		ciphertext = ciphertext.toUpperCase();
 		
-		middleText = cyphertext;
+		middleText = ciphertext;
 		
 		int userChoice = 0;
 		
-		for (int i = 0; i < cyphertext.length(); ++i) {
+		for (int i = 0; i < ciphertext.length(); ++i) {
 			
-			if ((cyphertext.charAt(i) >= 'A' && cyphertext.charAt(i) <= 'Z')) {
-				cyphertextLetterFrequency[cyphertext.charAt(i) - 'A'].frequency++;
+			if ((ciphertext.charAt(i) >= 'A' && ciphertext.charAt(i) <= 'Z')) {
+				cyphertextLetterFrequency[ciphertext.charAt(i) - 'A'].frequency++;
 			}
 			
 		}
@@ -107,7 +107,7 @@ public class CryptanalysisDecryptor extends EncrypterDecrypter {
 			
 			for (int i = 0; i < middleText.length(); ++i) {
 				
-				char chara = cyphertext.charAt(i);
+				char chara = ciphertext.charAt(i);
 				
 				if (chara == cyphertextLetterFrequency[currentLetter].letter) {
 					

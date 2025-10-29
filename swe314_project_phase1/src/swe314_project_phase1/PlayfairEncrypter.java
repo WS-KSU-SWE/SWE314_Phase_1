@@ -315,7 +315,7 @@ public class PlayfairEncrypter extends EncrypterDecrypter {
 	
 	public void encryptWithSteps() {
 		
-		cyphertext = "";
+		ciphertext = "";
 		String middleText = prepairPlaintext();
 		
 		
@@ -375,10 +375,10 @@ public class PlayfairEncrypter extends EncrypterDecrypter {
 				
 			}
 			
-			cyphertext += cypherChar1;
-			cyphertext += cypherChar2;
+			ciphertext += cypherChar1;
+			ciphertext += cypherChar2;
 			
-			System.out.println(cyphertext);
+			System.out.println(ciphertext);
 			
 		}
 		

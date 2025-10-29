@@ -157,10 +157,10 @@ public class KeyedTranspositionEncryptDecrypt extends EncrypterDecrypter {
 		
 		
 		
-		for (int i = 0; i < cyphertext.length(); ++i) {
+		for (int i = 0; i < ciphertext.length(); ++i) {
 					// check if the character is a letter
-			if ((cyphertext.charAt(i) >= 'a' && cyphertext.charAt(i) <= 'z') || (cyphertext.charAt(i) >= 'A' && cyphertext.charAt(i) <= 'Z')) {
-				middleText += cyphertext.charAt(i);
+			if ((ciphertext.charAt(i) >= 'a' && ciphertext.charAt(i) <= 'z') || (ciphertext.charAt(i) >= 'A' && ciphertext.charAt(i) <= 'Z')) {
+				middleText += ciphertext.charAt(i);
 			}
 			
 		}
