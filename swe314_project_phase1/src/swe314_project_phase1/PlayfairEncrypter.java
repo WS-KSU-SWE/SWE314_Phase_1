@@ -89,6 +89,7 @@ public class PlayfairEncrypter extends EncrypterDecrypter {
 				
 			}
 			catch (InputMismatchException e) {
+				input.nextLine();
 				System.out.println("Please enter an integer");
 			}
 			
