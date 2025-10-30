@@ -20,7 +20,18 @@ public class EncrypterDecrypter {
 		this.ciphertext = cyphertext;
 	}
 	
-	public boolean hasLetter(String str) {
+	
+	public String getPlaintext() {
+		return plaintext;
+	}
+	
+	
+	public String getCiphertext() {
+		return ciphertext;
+	}
+	
+	
+	public static boolean hasLetter(String str) {
 		
 		if (str == null) {
 			return false;

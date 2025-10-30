@@ -1,15 +1,15 @@
 package swe314_project_phase1;
 
-import java.util.Scanner;
+import java.util.*;
 
-public class CryptanalysisDecryptor extends EncrypterDecrypter {
+public class CryptanalysisDecrypter extends EncrypterDecrypter {
 
 	private char[] charaFrequency = {'E', 'T', 'A', 'O', 'I', 'N', 'S', 'H', 'R', 'D', 'L', 'C', 'U',
 									 'M', 'W', 'F', 'G', 'Y', 'P', 'B', 'V', 'K', 'J', 'Q', 'X', 'Z'};
 	private LetterFrequencyPair[] cyphertextLetterFrequency;
 	
 	
-	public CryptanalysisDecryptor() {
+	public CryptanalysisDecrypter() {
 		
 		cyphertextLetterFrequency = new LetterFrequencyPair[26];
 		
@@ -43,11 +43,11 @@ public class CryptanalysisDecryptor extends EncrypterDecrypter {
 	}
 	
 	
-	public int getChoice(int min, int max) {
+	public static int getChoice(int min, int max) {
 		
 		Scanner input = new Scanner(System.in);
 		boolean isValid = false;
-		int choice = 0;
+		int choice = min;
 		
 		
 		while (!isValid) {
@@ -65,7 +65,7 @@ public class CryptanalysisDecryptor extends EncrypterDecrypter {
 				}
 				
 			}
-			catch (Exception e) {
+			catch (InputMismatchException e) {
 				System.out.print("Please enter an integer: ");
 				input.nextLine();
 			}
@@ -82,11 +82,23 @@ public class CryptanalysisDecryptor extends EncrypterDecrypter {
 		Stack<String> stack = new LinkedStack<String>();
 		int frequencyLetterIndex = 0;
 		int currentLetter = 0;
-		String middleText;
+		String middleText = "";
 		
 		ciphertext = ciphertext.toUpperCase();
 		
-		middleText = ciphertext;
+		
+		
+		for (int i = 0; i < ciphertext.length(); ++i) {
+			
+			char letter = ciphertext.charAt(i);
+			
+			if (Character.isLetter(letter)) {
+				middleText += letter;
+			}
+			
+		}
+		
+		ciphertext = middleText;
 		
 		int userChoice = 0;
 		
@@ -101,7 +113,7 @@ public class CryptanalysisDecryptor extends EncrypterDecrypter {
 		sortCyphertextLetterFrequency();
 		
 		
-		while(userChoice != 4 || currentLetter == 26) {
+		while(userChoice != 4 || currentLetter >= 26) {
 			
 			String newMiddleText = "";
 			
@@ -153,8 +165,8 @@ public class CryptanalysisDecryptor extends EncrypterDecrypter {
 				}
 				break;	
 				
-				
 			default:
+	
 				userChoice = 4;
 				
 			}

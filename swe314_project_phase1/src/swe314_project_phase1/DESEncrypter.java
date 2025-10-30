@@ -1,8 +1,6 @@
 package swe314_project_phase1;
 
-import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-
+import java.util.*;
 
 /* This code is has been taken from https://github.com/deadlytea/DES and is authored by deadlytea.
  * The code has been modified in order to fit the needs of the project and any unused code and libraries from the original has been removed.
@@ -29,10 +27,12 @@ import java.math.BigInteger;
  * K			: subKeys
  * 
 */
-public class DESEncrypter {
+public class DESEncrypter extends EncrypterDecrypter {
 
 		
 		public static int KEY_LENGTH = 64; 
+		
+		String masterKey;
 		
 		private static int[] PC1 = 
 		{  
@@ -189,7 +189,7 @@ public class DESEncrypter {
 		 * However, this process will still be kept in the final code in order to not deviate too much from the original implementation.
 		 * The original code used to accept any piece of text as a key and used a hash function to change this key into a long. For the same reason as before, 
 		 * we have limited the key to only be a binary value with a max length of 64 bits. The hash function has been replaced by Long.parseLong(key, 2), where 2 
-		 * refers to the base 
+		 * refers to the base.
 		*/
 		/**
 		 * Encrypt a string message with the DES block cipher 
@@ -197,14 +197,16 @@ public class DESEncrypter {
 		 * @param plaintext
 		 * @return
 		 */
-		public String encrypt(String key, String plaintext) {
+		// The encrypt method has been modified in order to conform to the rest of the encryption by removing its parameters.
+		public String encrypt() {
 			
-			if (key.length() > KEY_LENGTH) {
+			if (masterKey.length() > KEY_LENGTH) {
+				
 				throw new RuntimeException("Invalid key length");
 			}
 			
 			// creates a list of keys
-			buildKeySchedule(Long.parseLong(key, 2));
+			buildKeySchedule(Long.parseLong(masterKey, 2));
 			
 			String binPlaintext = plaintext;
 			
@@ -632,8 +634,13 @@ public class DESEncrypter {
 		public static void main(String[] args) {
 			
 			DESEncrypter des = new DESEncrypter();
+			
+			//des.promptPlaintext();
 			 
-			des.encrypt("0001001100110100010101110111100110011011101111001101111111110001", "0000000100100011010001010110011110001001101010111100110111101111");
+			des.setPlaintext("0000000100100011010001010110011110001001101010111100110111101111");
+			des.setKey("0001001100110100010101110111100110011011101111001101111111110001");
+			
+			des.encrypt();
 			
 			
 		}
@@ -664,6 +671,104 @@ public class DESEncrypter {
 				System.out.println();
 			}
 			
+		}
+		
+		
+		public void promptKey() {
+			
+			Scanner input = new Scanner(System.in);
+			boolean isValid = false;
+			
+			System.out.print("Please enter a binary key that is at most 64 bits (1 and 0 ONLY!!): ");
+			
+			do {				
+				
+				try {
+					
+					masterKey = input.nextLine(); // if the user enters a space, we must inform them instead of continuing to run with the values before the space. That is why we use nextLine instead of next
+					
+					boolean isBinary = true;
+
+					if (masterKey.length() == 0 || masterKey.length() > 64) {
+						System.out.print("Please enter a binary key that is AT MOST 64 bits: ");
+						continue;
+					}
+					
+					for (int i = 0; i < masterKey.length(); ++i) {
+						
+						char bin = masterKey.charAt(i);
+						
+						if (bin != '1' && bin != '0') {
+							
+							isBinary = false;
+							System.out.print("Please enter a BINARY key that is at most 64 bits: ");
+							break;
+						}
+						
+					}
+					
+					isValid = isBinary;
+					
+				}
+				
+				catch (NumberFormatException e) {
+					System.out.print("Please enter a binary key that is at most 64 bits (1 and 0 ONLY!!): ");
+				}
+					
+			} while (!isValid);
+			
+		}
+		
+		
+		
+		public void promptPlaintext() {
+			
+			Scanner input = new Scanner(System.in);
+			boolean isValid = false;
+			
+			System.out.print("Please enter a binary plaintext that is at most 64 bits (1 and 0 ONLY!!): ");
+			
+			do {				
+				
+				try {
+					
+					plaintext = input.nextLine(); // if the user enters a space, we must inform them instead of continuing to run with the values before the space. That is why we use nextLine instead of next
+					
+					boolean isBinary = true;
+
+					if (plaintext.length() == 0 || plaintext.length() > 64) {
+						System.out.print("Please enter a binary plaintext that is AT MOST 64 bits: ");
+						continue;
+					}
+					
+					for (int i = 0; i < plaintext.length(); ++i) {
+						
+						char bin = plaintext.charAt(i);
+						
+						if (bin != '1' && bin != '0') {
+							
+							isBinary = false;
+							System.out.print("Please enter a BINARY plaintext that is at most 64 bits: ");
+							break;
+						}
+						
+					}
+					
+					isValid = isBinary;
+					
+				}
+				
+				catch (NumberFormatException e) {
+					System.out.print("Please enter a binary plaintext that is at most 64 bits (1 and 0 ONLY!!): ");
+				}
+					
+			} while (!isValid);
+			
+		}
+		
+		
+		private void setKey(String key) {
+			masterKey = key;
 		}
 		
 }

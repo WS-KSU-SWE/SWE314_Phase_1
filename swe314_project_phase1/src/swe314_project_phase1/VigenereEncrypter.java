@@ -1,12 +1,52 @@
 package swe314_project_phase1;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class VigenereEncrypter extends EncrypterDecrypter {
 
 	private String key;
 	
 	
-	public void setKey(String key) {
-		this.key = key;
+	public void promptKey() {
+		
+		Scanner input = new Scanner(System.in);
+		
+		boolean isValid = false; 
+		
+		System.out.print("Please enter a non-zero integer for the key: ");
+		
+		do {
+			
+			try {
+				key = input.nextLine();
+				key = key.trim(); // in case the user starts or ends with a space by mistake 
+				
+				isValid = true;
+				
+				for (int i = 0; i < key.length(); ++i) {
+					
+					char chara = key.charAt(i);
+					
+					if (!Character.isLetter(chara)) {
+						
+						System.out.print("Please enter a key that contains only letters (Space is not allowed!): ");
+						isValid = false;
+					
+					}
+					
+				}
+				
+			}
+			
+			catch (InputMismatchException e) {
+				input.nextLine();
+				System.out.print("Please enter a text key: ");
+			}
+		
+		} while (!isValid);
+		
+		key = key.toUpperCase();
 	}
 	
 	
@@ -21,6 +61,7 @@ public class VigenereEncrypter extends EncrypterDecrypter {
         int[] numericKey;
         int[] numericCiphertext;
         
+        ciphertext = ""; // reset the ciphertext
         
         System.out.println("First, we have to remove all non-letter characters from the plaintext and set all letters to lowercase: ");
         
@@ -39,24 +80,6 @@ public class VigenereEncrypter extends EncrypterDecrypter {
         plaintext = cleanPlaintext;
         
         System.out.println("Cleaned plaintext: " + plaintext);
-        
-        System.out.println("Then, we have to remove all non-letter characters from the key and set all letters to uppercase: ");
-        
-        key = key.toUpperCase();
-        
-        for (int i = 0; i < key.length(); ++i) {
-        	
-        	char ch = key.charAt(i);
-        	
-        	if (Character.isLetter(ch)) {
-        		cleanKey += ch;
-        	}
-        	
-        }
-        
-        key = cleanKey;
-        
-        System.out.println("Cleaned key: " + key);
         
         System.out.println("We then line up the plaintext and the key, repating the key once we reach the end:");
         

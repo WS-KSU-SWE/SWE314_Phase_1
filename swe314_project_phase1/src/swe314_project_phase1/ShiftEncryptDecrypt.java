@@ -1,16 +1,42 @@
 package swe314_project_phase1;
 
+import java.util.*;
+
 public class ShiftEncryptDecrypt extends EncrypterDecrypter {
 
 	private int key;
 	
-	public void setKey(int key) {
-		this.key = key;
+	public void promptKey() {
+		
+		Scanner input = new Scanner(System.in);
+		key = 0;
+		
+		System.out.print("Please enter a non-zero integer for the key: ");
+		
+		do {
+			
+			try {
+				key = input.nextInt();
+				
+				if (key == 0) {
+					System.out.print("We cannot encrypt or decrypt data using a key of 0, please enter a non-zero key: ");
+				}
+				
+			}
+			
+			catch (InputMismatchException e) {
+				input.nextLine();
+				System.out.print("Please enter an integer: ");
+			}
+		
+		} while (key == 0);
+		
 	}
 	
 	public void encryptWithSteps() {
 		
 		String cleanPlaintext = "";
+		ciphertext = ""; // reset the ciphertext
 		
 		System.out.println("First, we have to remove all non-letter characters from the plaintext and set all letters to lowercase: ");
 		
@@ -78,6 +104,8 @@ public class ShiftEncryptDecrypt extends EncrypterDecrypter {
 		
 		String cleanCiphertext = "";
 		
+		plaintext = ""; // // reset the plaintext
+		
 		System.out.println("First, we have to remove all non-letter characters from the ciphertext and set all letters to uppercase: ");
 		
 		ciphertext = ciphertext.toUpperCase();
@@ -135,6 +163,11 @@ public class ShiftEncryptDecrypt extends EncrypterDecrypter {
 		
 		System.out.println("Result: " + plaintext);
 		
+	}
+	
+	
+	public void reverseKey() {
+		key = -key;
 	}
 	
 }
