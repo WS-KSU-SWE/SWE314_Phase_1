@@ -8,12 +8,18 @@ public class Main {
 		CryptanalysisDecryptor cd = new CryptanalysisDecryptor();
 		PlayfairEncrypter pl = new PlayfairEncrypter();
 		VigenereEncrypter v = new VigenereEncrypter();
+		ShiftEncryptDecrypt s = new ShiftEncryptDecrypt();
 		
+		s.setCiphertext("EBIILQEBOBXDBKQ");
+		s.setKey(3);
+		s.decryptWithSteps();
+		
+		/*
 		v.setKey("monKey1");
 		v.setPlaintext("Meet Me there");
 		
 		v.encrpytWithSteps();
-		
+		*/
 		/*
 		pl.promptKey();
 		pl.setPlaintext("Hello There");

@@ -4,6 +4,12 @@ public class VigenereEncrypter extends EncrypterDecrypter {
 
 	private String key;
 	
+	
+	public void setKey(String key) {
+		this.key = key;
+	}
+	
+	
 	public void encrpytWithSteps() {
 	
         int keyIndex = 0;
@@ -15,7 +21,6 @@ public class VigenereEncrypter extends EncrypterDecrypter {
         int[] numericKey;
         int[] numericCiphertext;
         
-        ciphertext = "";
         
         System.out.println("First, we have to remove all non-letter characters from the plaintext and set all letters to lowercase: ");
         
@@ -128,9 +133,5 @@ public class VigenereEncrypter extends EncrypterDecrypter {
         
 	}
 	
-	
-	public void setKey(String key) {
-		this.key = key;
-	}
 	
 }

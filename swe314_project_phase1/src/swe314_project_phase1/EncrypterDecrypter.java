@@ -6,12 +6,17 @@ public class EncrypterDecrypter {
 	protected String ciphertext;
 	
 	
+	public EncrypterDecrypter() {
+		plaintext = "";
+		ciphertext = "";
+	}
+	
 	public void setPlaintext(String plaintext) {
 		this.plaintext = plaintext;
 	}
 	
 	
-	public void setCyphertext(String cyphertext) {
+	public void setCiphertext(String cyphertext) {
 		this.ciphertext = cyphertext;
 	}
 	
