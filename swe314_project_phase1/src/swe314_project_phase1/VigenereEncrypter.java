@@ -14,9 +14,11 @@ public class VigenereEncrypter extends EncrypterDecrypter {
 		
 		boolean isValid = false; 
 		
-		System.out.print("Please enter a non-zero integer for the key: ");
+		
+		System.out.print("Please enter text with only letters for the key: ");
 		
 		do {
+			
 			
 			try {
 				key = input.nextLine();
@@ -29,12 +31,15 @@ public class VigenereEncrypter extends EncrypterDecrypter {
 					char chara = key.charAt(i);
 					
 					if (!Character.isLetter(chara)) {
-						
+						key = "";
 						System.out.print("Please enter a key that contains only letters (Space is not allowed!): ");
 						isValid = false;
-					
 					}
 					
+				}
+				
+				if (key.length() == 0) {
+					isValid = false;
 				}
 				
 			}
@@ -152,7 +157,7 @@ public class VigenereEncrypter extends EncrypterDecrypter {
         }
         
         
-        System.out.println("Result: " + ciphertext);
+        System.out.println("\nResult: " + ciphertext);
         
 	}
 	

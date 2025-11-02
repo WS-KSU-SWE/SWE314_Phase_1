@@ -471,7 +471,7 @@ public class DESEncrypter extends EncrypterDecrypter {
 		}
 		
 		
-		public static String circularShift(String bin, int shift) {
+		private static String circularShift(String bin, int shift) {
 			
 			String result = "";
 			
@@ -628,22 +628,6 @@ public class DESEncrypter extends EncrypterDecrypter {
 			
 			return mergedP;
 		}
-		
-		
-		
-		public static void main(String[] args) {
-			
-			DESEncrypter des = new DESEncrypter();
-			
-			//des.promptPlaintext();
-			 
-			des.setPlaintext("0000000100100011010001010110011110001001101010111100110111101111");
-			des.setKey("0001001100110100010101110111100110011011101111001101111111110001");
-			
-			des.encrypt();
-			
-			
-		}
 	
 		
 		// added method to print a substitution matrix
@@ -689,10 +673,15 @@ public class DESEncrypter extends EncrypterDecrypter {
 					
 					boolean isBinary = true;
 
-					if (masterKey.length() == 0 || masterKey.length() > 64) {
-						System.out.print("Please enter a binary key that is AT MOST 64 bits: ");
+					if (masterKey.length() > KEY_LENGTH) {
+						System.out.print("Error. Please enter a binary key that is AT MOST 64 bits: ");
 						continue;
 					}
+					if (masterKey.length() == 0) {
+						System.out.print("Error, you entered an empty key. Please enter a binary key that is at most 64 bits: ");
+						continue;
+					}
+					
 					
 					for (int i = 0; i < masterKey.length(); ++i) {
 						
@@ -701,7 +690,7 @@ public class DESEncrypter extends EncrypterDecrypter {
 						if (bin != '1' && bin != '0') {
 							
 							isBinary = false;
-							System.out.print("Please enter a BINARY key that is at most 64 bits: ");
+							System.out.print("Error. Please enter a BINARY key that is at most 64 bits: ");
 							break;
 						}
 						
@@ -725,6 +714,7 @@ public class DESEncrypter extends EncrypterDecrypter {
 			
 			Scanner input = new Scanner(System.in);
 			boolean isValid = false;
+			final int blockLength = 64;
 			
 			System.out.print("Please enter a binary plaintext that is at most 64 bits (1 and 0 ONLY!!): ");
 			
@@ -736,8 +726,12 @@ public class DESEncrypter extends EncrypterDecrypter {
 					
 					boolean isBinary = true;
 
-					if (plaintext.length() == 0 || plaintext.length() > 64) {
+					if (plaintext.length() > blockLength) {
 						System.out.print("Please enter a binary plaintext that is AT MOST 64 bits: ");
+						continue;
+					}
+					if (plaintext.length() == 0) {
+						System.out.print("Error, you entered an empty plaintext. Please enter a binary plaintext that is at most 64 bits: ");
 						continue;
 					}
 					
@@ -767,8 +761,20 @@ public class DESEncrypter extends EncrypterDecrypter {
 		}
 		
 		
-		private void setKey(String key) {
-			masterKey = key;
+		public static void main(String[] args) {
+			
+			DESEncrypter des = new DESEncrypter();
+			
+			//des.promptPlaintext();
+			 
+			//des.setPlaintext("0000000100100011010001010110011110001001101010111100110111101111");
+			//des.setKey("0001001100110100010101110111100110011011101111001101111111110001");
+			
+			//des.encrypt();
+			
+			des.promptKey();			
+			System.out.println(des.masterKey);
+			
 		}
 		
 }
