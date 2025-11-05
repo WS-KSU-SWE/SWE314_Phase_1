@@ -1,6 +1,6 @@
 Author: Rayan Aloraydi
 
-Reviewer: Wael Alanazi
+Reviewer/Editor: Wael Alanazi
 
 SWE314 Project - Code Structure Overview
 ============================================
