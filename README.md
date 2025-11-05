@@ -6,6 +6,7 @@ SWE314 Project - Code Structure Overview
 Package Structure
 -----------------
 swe314_project_phase1/
+
 ├─ EncrypterDecrypter.java           (abstract base class for encryption/decryption)
 ├─ ShiftEncryptDecrypt.java          (Shift / Caesar cipher implementation)
 ├─ PlayfairEncrypter.java            (Playfair cipher implementation)
