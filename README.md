@@ -106,7 +106,7 @@ Keyed Transposition:
 DES:
     encryptBlock()     → apply IP → 16 Feistel rounds → FP
     decryptBlock()     → same but reverse subkey order
-----------------------------------------
+
 How to Run:
 ----------------------------------------
 Simply download the code to Eclipse and press the run button. 
