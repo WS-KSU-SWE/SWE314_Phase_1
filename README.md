@@ -8,13 +8,21 @@ Package Structure
 swe314_project_phase1/
 
 ├─ EncrypterDecrypter.java           (abstract base class for encryption/decryption)
+
 ├─ ShiftEncryptDecrypt.java          (Shift / Caesar cipher implementation)
+
 ├─ PlayfairEncrypter.java            (Playfair cipher implementation)
+
 ├─ VigenereEncrypter.java            (Vigenère cipher implementation)
+
 ├─ KeyedTranspositionEncryptDecrypt.java (Keyed Transposition cipher implementation)
+
 ├─ DESEncrypter.java                 (DES encryption/decryption implementation)
+
 ├─ CryptoUtils.java                  (helper utilities for cleaning text, conversions, padding)
+
 ├─ Validation.java                   (input validation and error handling)
+
 └─ Main.java                         (entry point, algorithm selection menu)
 
 Number of Classes
