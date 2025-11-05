@@ -68,6 +68,46 @@ public class VigenereEncrypter extends EncrypterDecrypter {
         
         ciphertext = ""; // reset the ciphertext
         
+        // input validation
+        if (plaintext == null) {
+			System.out.println("Error. Plaintext is null.");
+			return;
+		}
+		
+		
+		if (plaintext.length() == 0) {
+			System.out.println("Error. Empty plaintext.");
+			return;
+		}
+		
+		if (!hasLetter(plaintext)) {
+			System.out.println("Error. Plaintext has no letters.");
+			return;
+		}
+        
+		if (key == null) {
+			System.out.println("Error. Key is null.");
+			return;
+		}
+		
+		
+		if (key.length() == 0) {
+			System.out.println("Error. Empty key.");
+			return;
+		}
+		
+		for (int i = 0; i < key.length(); ++i) {
+			
+			char chara = key.charAt(i);
+			
+			if (!Character.isLetter(chara)) {
+				System.out.print("Error. Invalid key.");
+				return;
+			}
+			
+		}
+		
+		
         System.out.println("First, we have to remove all non-letter characters from the plaintext and set all letters to lowercase: ");
         
         plaintext = plaintext.toLowerCase();
@@ -161,5 +201,15 @@ public class VigenereEncrypter extends EncrypterDecrypter {
         
 	}
 	
-	
+	/*
+	public static void main(String[] args) {
+		
+		VigenereEncrypter v = new VigenereEncrypter();
+		
+		v.plaintext = "";
+		v.key = "";
+		
+		
+	}
+	*/
 }

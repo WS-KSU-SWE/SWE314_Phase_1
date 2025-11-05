@@ -128,6 +128,33 @@ public class KeyedTranspositionEncryptDecrypt extends EncrypterDecrypter {
 		
 		ciphertext = ""; // reset the ciphertext
 		
+		// input validation
+		if (plaintext == null) {
+			System.out.println("Error. Plaintext is null.");
+			return;
+		}
+		
+		
+		if (plaintext.length() == 0) {
+			System.out.println("Error. Empty plaintext.");
+			return;
+		}
+		
+		if (!hasLetter(plaintext)) {
+			System.out.println("Error. Plaintext has no letters.");
+			return;
+		}
+		
+		for (int i = 0; i < key.length; ++i) {
+			
+			if (key[i] < 1 || key[i] > key.length) {
+				System.out.println("Error. Invalid key.");
+				return;
+			}
+			
+		}
+		
+		
 		for (int i = 0; i < plaintext.length(); ++i) {
 					// check if the character is a letter
 			if ((plaintext.charAt(i) >= 'a' && plaintext.charAt(i) <= 'z') || (plaintext.charAt(i) >= 'A' && plaintext.charAt(i) <= 'Z')) {
@@ -182,7 +209,7 @@ public class KeyedTranspositionEncryptDecrypt extends EncrypterDecrypter {
 		
 	}
 	
-	
+
 	public void decryptWithSteps() {
 		
 		String middleText = "";
@@ -191,7 +218,33 @@ public class KeyedTranspositionEncryptDecrypt extends EncrypterDecrypter {
 		
 		plaintext = ""; // reset the plaintext
 		
+		// input validation
+		if (ciphertext == null) {
+			System.out.println("Error. Ciphertext is null.");
+			return;
+		}
+				
+				
+		if (ciphertext.length() == 0) {
+			System.out.println("Error. Empty ciphertext.");
+			return;
+		}
+			
+		if (!hasLetter(ciphertext)) {
+			System.out.println("Error. Ciphertext has no letters.");
+			return;
+		}
+				
+		for (int i = 0; i < key.length; ++i) {
+			
+			if (key[i] < 1 || key[i] > key.length) {
+				System.out.println("Error. Invalid key.");
+				return;
+			}
+			
+		}
 		
+				
 		for (int i = 0; i < ciphertext.length(); ++i) {
 					// check if the character is a letter
 			if ((ciphertext.charAt(i) >= 'a' && ciphertext.charAt(i) <= 'z') || (ciphertext.charAt(i) >= 'A' && ciphertext.charAt(i) <= 'Z')) {
@@ -268,4 +321,20 @@ public class KeyedTranspositionEncryptDecrypt extends EncrypterDecrypter {
 		System.out.println();
 	}
 	
+	/*
+	public static void main(String[] args) {
+		
+		KeyedTranspositionEncryptDecrypt k = new KeyedTranspositionEncryptDecrypt(4);
+		
+		k.key[0] = 2;
+		k.key[1] = 3;
+		k.key[2] = 4;
+		k.key[3] = 0;
+		
+		k.plaintext = "Hello";
+		
+		k.encryptWithSteps();
+		
+	}
+	*/
 }

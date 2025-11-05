@@ -37,6 +37,9 @@ public class EncrypterDecrypter {
 			return false;
 		}
 		
+		if (str.length() == 0) {
+			return false;
+		}
 		
 		for (int i = 0; i < str.length(); ++i) {
 			

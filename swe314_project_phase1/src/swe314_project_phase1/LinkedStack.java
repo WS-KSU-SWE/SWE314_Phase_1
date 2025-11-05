@@ -1,5 +1,7 @@
 package swe314_project_phase1;
 
+// The implementation for the linked stack was taken from the CSC 212 data structure course. We could have used the java collection but we had no idea what that
+// Was when we implemented the system.
 public class LinkedStack<T> implements Stack<T> {
 
 	private Node<T> top;

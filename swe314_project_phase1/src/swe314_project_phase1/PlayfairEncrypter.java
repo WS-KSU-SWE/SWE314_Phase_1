@@ -14,6 +14,36 @@ public class PlayfairEncrypter extends EncrypterDecrypter {
 			{"Z", "Y", "W", "T", "P"}
 			};
 	*/
+	/*
+	private String[][] key = { 
+			{"1", "2", "3", "4", "5"}, 
+			{"6", "7", "8", "9", "10"}, 
+			{"11", "12", "13", "!!", "14"}, 
+			{"15", "16", "17", "18", "19"}, 
+			{"20", "21", "22", "#", "%"} 
+			};
+	*/
+	/*
+	private String[][] key = {
+			{"1", "a", "3", "X", "5"}, 
+			{"6", "r", "8", "9", "10"}, 
+			{"11", "g", "E!", "!!", "14"}, 
+			{"15", "16", "F", "18", "19"}, 
+			{"20", "21", "Z", "#", "%"} 
+	
+	};
+	*/
+	/*
+	private String[][] key = {
+			{"", "", "", "", ""}, 
+			{"", "", "", "", ""}, 
+			{"", "", "", "", ""}, 
+			{"", "", "", "", ""}, 
+			{"", "", "", "", ""} 
+
+	};
+ 	*/
+	
 	private String[][] key;
 	private int doubleLetterRow;
 	private int doubleLetterCol;
@@ -71,6 +101,8 @@ public class PlayfairEncrypter extends EncrypterDecrypter {
 		char secondDoubleChar = '\0';
 		
 		boolean isValid = false;
+		
+		key = new String[5][5]; // refresh key
 		
 		do {
 			
@@ -260,7 +292,7 @@ public class PlayfairEncrypter extends EncrypterDecrypter {
 	}
 	
 	
-	public String prepairPlaintext() {
+	public String preparePlaintext() {
 		
 		String middleText1 = "";
 		String middleText2 = "";
@@ -279,13 +311,18 @@ public class PlayfairEncrypter extends EncrypterDecrypter {
 			
 			char letter1 = middleText1.charAt(i);
 			
+			// insert z (or x) if the formatted plaintext (middleText2) has an odd length
 			if (i == middleText1.length() - 1) {
 				
 				middleText2 += letter1;
 				
-				if (middleText2.length() % 2 == 1) {
+				if (middleText2.length() % 2 == 1 && letter1 != 'Z') {
 					middleText2 += "Z";
 				}
+				if (middleText2.length() % 2 == 1 && letter1 == 'Z') {
+					middleText2 += "X";
+				}
+				
 				
 			}
 			else {
@@ -294,11 +331,18 @@ public class PlayfairEncrypter extends EncrypterDecrypter {
 				
 				Cell letter1Cell = findCell(letter1);
 				Cell letter2Cell = findCell(letter2);
-				
+				// add X (or Z) in between same letters in the same block
 				if (letter1Cell.equals(letter2Cell)) {
 					
 					i--;
-					letter2 = 'X';
+					// in the case where we have XX in the same block --> XZ
+					if (letter2 != 'X') {
+						letter2 = 'X';
+					}
+					else {
+						letter2 = 'Z';
+					}
+					
 				}
 				
 				middleText2 += letter1;
@@ -316,12 +360,48 @@ public class PlayfairEncrypter extends EncrypterDecrypter {
 	public void encryptWithSteps() {
 		
 		ciphertext = "";
-		String middleText = prepairPlaintext();
+		String middleText;
 		
+		// input validation
+		if (plaintext == null) {
+			System.out.println("Error. Plaintext is null.");
+			return;
+		}
+		
+		
+		if (plaintext.length() == 0) {
+			System.out.println("Error. Empty plaintext.");
+			return;
+		}
+		
+		if (!hasLetter(plaintext)) {
+			System.out.println("Error. Plaintext has no letters.");
+			return;
+		}
+		
+		if (key == null) {
+			System.out.println("Error. Key is null.");
+			return;
+		}
+		
+		// checks for empty cells and cells with only non letters
+		for (int i = 0; i < key.length; ++i) {
+			for (int j = 0; j < key[i].length; ++j) {
+				
+				if (!hasLetter(key[i][j])) {
+					
+					System.out.println("Error. Key is invalid.");
+					return;
+				}
+				
+			}
+		}
+		
+		middleText = preparePlaintext();
 		
 		printKeyMatrix();
-		System.out.println("First, we prepare the plaintext by inserting an 'X' between 2 letters that are paired together");
-		System.out.println("and share the same cell in the key and then add a 'Z' at the end if the resulting lenght is odd:");
+		System.out.println("First, we prepare the plaintext by inserting an 'X' (or 'Z') between 2 letters that are paired together");
+		System.out.println("and share the same cell in the key and then add a 'Z' (or 'X') at the end if the resulting lenght is odd:");
 		
 		System.out.println(middleText);
 		
@@ -335,7 +415,7 @@ public class PlayfairEncrypter extends EncrypterDecrypter {
 			
 			char cypherChar1 = '\0';
 			char cypherChar2 = '\0';
-			
+			//shift right
 			if (letter1Cell.getRow() == letter2Cell.getRow()) {
 				
 				int row = letter1Cell.getRow();
@@ -351,7 +431,7 @@ public class PlayfairEncrypter extends EncrypterDecrypter {
 				System.out.println("Since " + letter1 + " and " + letter2 + " are on the same row in the matrix, we shift one unit right:");
 				
 			}
-			
+			// shift down 
 			else if (letter1Cell.getCol() == letter2Cell.getCol()) {
 				
 				int col = letter1Cell.getCol();
@@ -366,7 +446,7 @@ public class PlayfairEncrypter extends EncrypterDecrypter {
 				
 				System.out.println("Since " + letter1 + " and " + letter2 + " are on the same column in the matrix, we shift one unit down:");
 			}
-			
+			// swap
 			else {
 				cypherChar1 = key[letter1Cell.getRow()][letter2Cell.getCol()].charAt(0);
 				cypherChar2 = key[letter2Cell.getRow()][letter1Cell.getCol()].charAt(0);
@@ -385,4 +465,17 @@ public class PlayfairEncrypter extends EncrypterDecrypter {
 		
 	}
 	
+	/*
+	public static void main(String[] args) {
+		
+		PlayfairEncrypter p = new PlayfairEncrypter();
+		
+		p.plaintext = "Hello";
+		
+		//System.out.println(p.preparePlaintext());
+		
+		p.encryptWithSteps();
+		
+	}
+	*/
 }

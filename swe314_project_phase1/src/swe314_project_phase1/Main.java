@@ -31,8 +31,25 @@ public class Main {
 		
 		
 		if (choice != 5 && choice != 7) {
+			
+			boolean valid = false;
+			
 			System.out.print("Please enter the plaintext: ");
-			plaintext = input.nextLine();
+			
+			while (!valid) {
+				
+				plaintext = input.nextLine();
+				
+				if (EncrypterDecrypter.hasLetter(plaintext)) {
+					valid = true;
+				}
+				else {
+					System.out.print("Please enter letters for the plaintext: ");
+				}
+				
+			}
+			
+			
 		}
 		
 		
@@ -123,6 +140,7 @@ public class Main {
 		
 		choice = CryptanalysisDecrypter.getChoice(1, 4);
 		
+		boolean valid = false;
 		
 		switch (choice) {
 		
@@ -143,8 +161,23 @@ public class Main {
 				
 			}
 			
+			valid = false;
+			
 			System.out.print("Please enter the ciphertext: ");
-			ciphertext = input.nextLine();
+			
+			while (!valid) {
+				
+				ciphertext = input.nextLine();
+				
+				if (EncrypterDecrypter.hasLetter(ciphertext)) {
+					valid = true;
+				}
+				else {
+					System.out.print("Please enter letters for the ciphertext: ");
+				}
+				
+			}
+			
 			
 			shift.setCiphertext(ciphertext);
 			shift.promptKey();
@@ -169,8 +202,23 @@ public class Main {
 				
 			}
 			
+
+			valid = false;
+			
 			System.out.print("Please enter the ciphertext: ");
-			ciphertext = input.nextLine();
+			
+			while (!valid) {
+				
+				ciphertext = input.nextLine();
+				
+				if (EncrypterDecrypter.hasLetter(ciphertext)) {
+					valid = true;
+				}
+				else {
+					System.out.print("Please enter letters for the ciphertext: ");
+				}
+				
+			}
 			
 			keyedTransposition.setCiphertext(ciphertext);
 			keyedTransposition.promptKey();
@@ -180,8 +228,23 @@ public class Main {
 			
 		case 3: 
 			
+			valid = false;
+			
 			System.out.print("Please enter the ciphertext: ");
-			ciphertext = input.nextLine();
+			
+			while (!valid) {
+				
+				ciphertext = input.nextLine();
+				
+				if (EncrypterDecrypter.hasLetter(ciphertext)) {
+					valid = true;
+				}
+				else {
+					System.out.print("Please enter letters for the ciphertext: ");
+				}
+				
+			}
+			
 			
 			cryptanalysis.setCiphertext(ciphertext);
 			cryptanalysis.decrypt();

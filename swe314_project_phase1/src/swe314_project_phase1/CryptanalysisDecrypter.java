@@ -65,7 +65,7 @@ public class CryptanalysisDecrypter extends EncrypterDecrypter {
 				}
 				
 			}
-			catch (InputMismatchException e) {
+			catch (Exception e) {
 				System.out.print("Please enter an integer: ");
 				input.nextLine();
 			}
@@ -83,6 +83,22 @@ public class CryptanalysisDecrypter extends EncrypterDecrypter {
 		int frequencyLetterIndex = 0;
 		int currentLetter = 0;
 		String middleText = "";
+		
+		// input validation
+		if (ciphertext == null) {
+			System.out.println("Error. Ciphertext is null");
+			return;
+		}
+		
+		if (ciphertext.length() == 0) {
+			System.out.println("Error. Empty ciphertext.");
+			return;
+		}
+		
+		if (!hasLetter(ciphertext)) {
+			System.out.println("Error. Ciphertext has no letters.");
+			return;
+		}
 		
 		ciphertext = ciphertext.toUpperCase();
 		
@@ -174,5 +190,21 @@ public class CryptanalysisDecrypter extends EncrypterDecrypter {
 		}
 		
 	}
+	
+	/*
+	public static void main(String[] args) {
+		
+		CryptanalysisDecrypter c = new CryptanalysisDecrypter();
+		
+		//c.ciphertext = "OGgvOGVjGTG";
+		c.ciphertext = "123#$%";
+		//c.ciphertext = "OGgvOGVjGTG123@#$";
+		//c.ciphertext = "";
+		//c.ciphertext = null;
+		
+		c.decrypt();
+		
+	}
+	*/
 	
 }

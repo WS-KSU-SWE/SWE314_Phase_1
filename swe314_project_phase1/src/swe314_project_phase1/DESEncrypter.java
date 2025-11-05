@@ -200,14 +200,78 @@ public class DESEncrypter extends EncrypterDecrypter {
 		// The encrypt method has been modified in order to conform to the rest of the encryption by removing its parameters.
 		public String encrypt() {
 			
+			final int blockSize = 64;
+			
+			// input validation
+			if (masterKey == null) {
+				System.out.println("Error: key is null");
+				return "";
+			}
+			
+			if (plaintext == null) {
+				System.out.println("Error: plaintext is null");
+				return "";
+			}
+			
+			
 			if (masterKey.length() > KEY_LENGTH) {
 				
-				throw new RuntimeException("Invalid key length");
+				System.out.println("Error: Invalid key length");
+				return "";
+				
+				//throw new RuntimeException("Invalid key length");
+			}
+			
+			if (masterKey.length() == 0) {
+				
+				System.out.println("Error: Empty key entered");
+				return "";
+			}
+			
+			if (plaintext.length() > blockSize) {
+				
+				System.out.println("Error: Invalid plaintext length");
+				return "";
+				
+				//throw new RuntimeException("Invalid key length");
+			}
+			
+			if (plaintext.length() == 0) {
+				
+				System.out.println("Error: Empty plaintext entered");
+				return "";
+			}
+			
+			// check if key is binary 
+			try {
+				Long.parseLong(masterKey, 2); // parses masterKey into a long in base 2 (directly puts the bits into the space of a long) if it fails, then it is not binary
+			}
+			catch (Exception e) {
+				System.out.println("Error: Nonbinary key entered");
+				return "";
+			}
+			
+			// check if plaintext is binary
+			try {
+				Long.parseLong(plaintext, 2); // parses plaintext into a long in base 2 (directly puts the bits into the space of a long) if it fails, then it is not binary
+			}
+			catch (Exception e) {
+				System.out.println("Error: Nonbinary plaintext entered");
+				return "";
+			}
+			
+			
+			while(masterKey.length() < KEY_LENGTH) {
+				masterKey = "0" + masterKey;
+			}
+			
+			while(plaintext.length() < blockSize) {
+				plaintext = "0" + plaintext;
 			}
 			
 			// creates a list of keys
 			buildKeySchedule(Long.parseLong(masterKey, 2));
-			
+			///;;;;;;;;;;;;;;/"
 			String binPlaintext = plaintext;
 			
 			// Add padding if necessary
@@ -256,8 +320,14 @@ public class DESEncrypter extends EncrypterDecrypter {
 		public String encryptBlock(String plaintextBlock) throws Exception {
 			
 			int length = plaintextBlock.length();
-			if (length != 64)
-				throw new RuntimeException("Input block length is not 64 bits!");
+			
+			if (length != 64) {
+				
+				System.out.println("Input block length is not 64 bits!");
+				return "";
+				//throw new RuntimeException("Input block length is not 64 bits!");
+			}
+				
 			
 			System.out.println("Step 2: Encrypt the plaintext\n");
 			System.out.println("Given our plaintext: " + plaintextBlock);
@@ -701,10 +771,16 @@ public class DESEncrypter extends EncrypterDecrypter {
 				}
 				
 				catch (NumberFormatException e) {
-					System.out.print("Please enter a binary key that is at most 64 bits (1 and 0 ONLY!!): ");
+					System.out.print("Error. Please enter a binary key that is at most 64 bits (1 and 0 ONLY!!): ");
 				}
 					
 			} while (!isValid);
+			
+			while(masterKey.length() < KEY_LENGTH) {
+				masterKey = "0" + masterKey;
+			}
+				
+			
 			
 		}
 		
@@ -727,7 +803,7 @@ public class DESEncrypter extends EncrypterDecrypter {
 					boolean isBinary = true;
 
 					if (plaintext.length() > blockLength) {
-						System.out.print("Please enter a binary plaintext that is AT MOST 64 bits: ");
+						System.out.print("Error. Please enter a binary plaintext that is AT MOST 64 bits: ");
 						continue;
 					}
 					if (plaintext.length() == 0) {
@@ -742,7 +818,7 @@ public class DESEncrypter extends EncrypterDecrypter {
 						if (bin != '1' && bin != '0') {
 							
 							isBinary = false;
-							System.out.print("Please enter a BINARY plaintext that is at most 64 bits: ");
+							System.out.print("Error. Please enter a BINARY plaintext that is at most 64 bits: ");
 							break;
 						}
 						
@@ -753,14 +829,18 @@ public class DESEncrypter extends EncrypterDecrypter {
 				}
 				
 				catch (NumberFormatException e) {
-					System.out.print("Please enter a binary plaintext that is at most 64 bits (1 and 0 ONLY!!): ");
+					System.out.print("Error. Please enter a binary plaintext that is at most 64 bits (1 and 0 ONLY!!): ");
 				}
 					
 			} while (!isValid);
 			
+			while(plaintext.length() < blockLength) {
+				plaintext = "0" + plaintext;
+			}
+			
 		}
 		
-		
+		/*
 		public static void main(String[] args) {
 			
 			DESEncrypter des = new DESEncrypter();
@@ -772,9 +852,15 @@ public class DESEncrypter extends EncrypterDecrypter {
 			
 			//des.encrypt();
 			
-			des.promptKey();			
-			System.out.println(des.masterKey);
+			//des.promptKey();			
+			//System.out.println(des.masterKey);
+			
+			des.plaintext = null;
+			des.masterKey = "0001001100110100010101110111100110011011101111001101111111110001";
+			
+			des.encrypt();
+			
 			
 		}
-		
+		*/
 }

@@ -38,6 +38,28 @@ public class ShiftEncryptDecrypt extends EncrypterDecrypter {
 		String cleanPlaintext = "";
 		ciphertext = ""; // reset the ciphertext
 		
+		// input validation
+		if (plaintext == null) {
+			System.out.println("Error. Plaintext is null.");
+			return;
+		}
+		
+		
+		if (plaintext.length() == 0) {
+			System.out.println("Error. Empty plaintext.");
+			return;
+		}
+		
+		if (!hasLetter(plaintext)) {
+			System.out.println("Error. Plaintext has no letters.");
+			return;
+		}
+		
+		if (key == 0) {
+			System.out.println("Error. Key is 0.");
+			return;
+		}
+		
 		System.out.println("First, we have to remove all non-letter characters from the plaintext and set all letters to lowercase: ");
 		
 		plaintext = plaintext.toLowerCase();
@@ -106,6 +128,29 @@ public class ShiftEncryptDecrypt extends EncrypterDecrypter {
 		
 		plaintext = ""; // // reset the plaintext
 		
+		// input validation
+		if (ciphertext == null) {
+			System.out.println("Error. Ciphertext is null.");
+			return;
+		}
+		
+		
+		if (ciphertext.length() == 0) {
+			System.out.println("Error. Empty ciphertext.");
+			return;
+		}
+		
+		if (!hasLetter(ciphertext)) {
+			System.out.println("Error. Ciphertext has no letters.");
+			return;
+		}
+		
+		if (key == 0) {
+			System.out.println("Error. Key is 0.");
+			return;
+		}
+		
+		
 		System.out.println("First, we have to remove all non-letter characters from the ciphertext and set all letters to uppercase: ");
 		
 		ciphertext = ciphertext.toUpperCase();
@@ -170,4 +215,16 @@ public class ShiftEncryptDecrypt extends EncrypterDecrypter {
 		key = -key;
 	}
 	
+	/*
+	public static void main(String[] args) {
+		
+		ShiftEncryptDecrypt s = new ShiftEncryptDecrypt();
+		
+		s.ciphertext = "Hello agent 1!";
+		s.key = 1;
+		
+		s.decryptWithSteps();
+		
+	}
+	*/
 }
